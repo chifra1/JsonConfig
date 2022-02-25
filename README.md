@@ -1,3 +1,4 @@
 #JsonConfig
 
-A very simple json config file manager
+A very simple way to manage json config file
+using Newtonsoft.Json library
