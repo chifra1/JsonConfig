@@ -39,6 +39,25 @@ namespace Utils
             }
             return _ret; 
         }
+
+
+        /// <summary>
+        /// in the case of only one config file
+        /// </summary>
+        static private JsonConfigHandler<T>? _singleton_handler;
+        static private T? _singleton;
+        static public T? GetConfig()
+        {
+            if (_singleton_handler == null)
+            {
+                _singleton_handler = new JsonConfigHandler<T>();
+            }
+            if (_singleton == null)
+            {
+                _singleton = _singleton_handler.Load();
+            }
+            return _singleton;
+        }
     }
     public class JsonConfig
     { 
