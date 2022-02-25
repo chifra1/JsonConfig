@@ -7,16 +7,20 @@ namespace UtilsExamples
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("JsonConfigHandler example: see settings.cfg.example");
 
             JsonConfigHandler<JsonConfigExample> handler = new JsonConfigHandler<JsonConfigExample>("settings.cfg");
             
             //to get an example of json config file
             JsonConfigExample example = new JsonConfigExample() { Mailfrom = "ddd@example.org", Mailto = "aaa@example.org,bbb@example.org", ServerSmtp = "mail.example.org", Port = 555 };
             handler.WriteExample(example);
-            
+
             //load a json configuration file
-            handler.Load();
+            JsonConfigExample? myconfig= handler.Load();
+            if (myconfig != null)
+            { 
+                if(myconfig.Mailfrom != null)   Console.WriteLine("Mailfrom=" + myconfig.Mailfrom);
+            }
         }
     }
     /// <summary>
