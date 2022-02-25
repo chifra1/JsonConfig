@@ -25,17 +25,17 @@ namespace Utils
         {
             File.WriteAllText(_filename, JsonConvert.SerializeObject(config, new JsonSerializerSettings { Formatting = Newtonsoft.Json.Formatting.Indented }));
         }
-        public JsonConfig? Load()
+        public T? Load()
         {
-            JsonConfig? _ret = null;
+            T? _ret = null;
             //load configuration file
             try
             {
-                _ret = JsonConvert.DeserializeObject<JsonConfig>(File.ReadAllText(_filename));                
+                _ret = JsonConvert.DeserializeObject<T>(File.ReadAllText(_filename));                
             }
             catch (Exception ex)
             {
-                File.WriteAllText(_filename + ".log", "Wrong config file\n\n" + ex.Message);
+                File.AppendAllText(_filename + ".log", DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") + "\nWrong config file\n\n" + ex.Message);
             }
             return _ret; 
         }
